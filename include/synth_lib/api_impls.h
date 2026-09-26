@@ -4,6 +4,11 @@
 #include "config.h"
 #include "stdbool.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 typedef struct
 {
     int table;
@@ -36,5 +41,9 @@ float sinfLUT(float x);
 void FM_InitOsc(FM_Oscillator *osc, float carrier_freq, float modulation_freq, float d, float amplitude);
 sound_sample_t FM_GetSample(FM_Oscillator *osc);
 sound_sample_t FM_GetSampleLUT(FM_Oscillator *osc);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
