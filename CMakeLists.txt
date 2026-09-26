@@ -14,6 +14,7 @@ add_library(synth
 
     src/fm_lut.c
     src/fm_sin.c
+    src/fm.c
 )
 
 target_include_directories(synth
