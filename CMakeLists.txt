@@ -7,14 +7,25 @@ set(INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-add_library(synth
-    src/wt_trunc.c
-    src/wt_lerp.c
-    src/wt.c
+set(IMPLS
+    wt_trunc
+    wt_lerp
+    
+    fm_lut
+    fm_sin
+)
 
-    src/fm_lut.c
-    src/fm_sin.c
+set(ALL_SOURCES
+    src/wt.c
     src/fm.c
+)
+
+foreach(impl IN LISTS IMPLS)
+    list(APPEND ALL_SOURCES src/${impl}.c)
+endforeach()
+
+add_library(synth
+    ${ALL_SOURCES}
 )
 
 target_include_directories(synth
