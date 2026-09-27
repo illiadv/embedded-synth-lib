@@ -23,43 +23,43 @@ target_include_directories(synth PRIVATE ${INCLUDES})
 
 enable_testing()
 
-add_executable(test_wavetable
-    tests/test_wavetable.c
+add_executable(test_wt_lerp
+    tests/test_wt_lerp.c
     src/wt_lerp.c
     src/wt.c
     external/unity/unity.c
 )
-target_include_directories(test_wavetable
+target_include_directories(test_wt_lerp
     PRIVATE
     ${INCLUDES}
     ${CMAKE_CURRENT_SOURCE_DIR}/external
 )
-target_link_libraries(test_wavetable
+target_link_libraries(test_wt_lerp
     PRIVATE
     m
 )
-add_test(NAME testWavetable COMMAND test_wavetable)
+add_test(NAME testWavetable COMMAND test_wt_lerp)
 
 
-add_executable(test_signal_wavetable
-    tests/test_signal_wavetable.c
+add_executable(test_wt_signal
+    tests/test_wt_signal.c
     src/wt_lerp.c
     src/wt.c
     external/unity/unity.c
 )
 
-target_include_directories(test_signal_wavetable
+target_include_directories(test_wt_signal
     PRIVATE
     ${INCLUDES}
     ${CMAKE_CURRENT_SOURCE_DIR}/external
 )
 
-target_link_libraries(test_signal_wavetable
+target_link_libraries(test_wt_signal
     PRIVATE
     m
 )
 
-add_test(NAME testSignalWavetable COMMAND test_signal_wavetable)
+add_test(NAME testSignalWavetable COMMAND test_wt_signal)
 
 
 add_executable(test_sinflut
