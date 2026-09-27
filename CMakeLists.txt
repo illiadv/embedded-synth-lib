@@ -14,9 +14,14 @@ add_library(synth
 
     src/fm_lut.c
     src/fm_sin.c
+    src/fm.c
 )
 
-target_include_directories(synth PRIVATE ${INCLUDES})
+target_include_directories(synth
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:/include>
+)
 
 
 # Tests
