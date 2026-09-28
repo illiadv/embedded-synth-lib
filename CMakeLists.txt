@@ -15,17 +15,17 @@ set(IMPLS
     "fm_sin"
 )
 
-set(ACTIVE_IMPL "WT_truc" CACHE STRING "Selected implementation to build")
+set(ACTIVE_IMPL "wt_truc" CACHE STRING "Selected implementation to build")
 set_property(CACHE ACTIVE_IMPL PROPERTY STRINGS ${ALL_IMPLS})
 
 string(SUBSTRING ${ACTIVE_IMPL} 0 2 SYNTH_METHOD)
 
-message(Building implementation ${ACTIVE_IMPL})
-message(Synthesis method is ${SYNTH_METHOD})
+message("Building implementation ${ACTIVE_IMPL}")
+message("Synthesis method is ${SYNTH_METHOD}")
 
-if (SYNTH_METHOD EQUAL "wt")
+if ("${SYNTH_METHOD}" STREQUAL "wt")
     set(TARGET_INIT_DEF "InitOsc_${SYNTH_METHOD}(&_wt_osc_default freq 0 1.0f")
-elseif(SYNTH_METHOD EQUAL "fm")
+elseif("${SYNTH_METHOD}" STREQUAL "fm")
     set(TARGET_INIT_DEF "InitOsc_${SYNTH_METHOD}(&_fm_osc_default freq 1.0f 0 1.0f")
 else()
     message(FATAL_ERROR "Wrong synth method selected")
