@@ -8,12 +8,38 @@ set(INCLUDES
 )
 
 set(IMPLS
-    wt_trunc
-    wt_lerp
+    "wt_trunc"
+    "wt_lerp"
     
-    fm_lut
-    fm_sin
+    "fm_lut"
+    "fm_sin"
 )
+
+set(ACTIVE_IMPL "WT_truc" CACHE STRING "Selected implementation to build")
+set_property(CACHE ACTIVE_IMPL PROPERTY STRINGS ${ALL_IMPLS})
+
+string(SUBSTRING ${ACTIVE_IMPL} 0 2 SYNTH_METHOD)
+
+message(Building implementation ${ACTIVE_IMPL})
+message(Synthesis method is ${SYNTH_METHOD})
+
+if (SYNTH_METHOD EQUAL "wt")
+    set(TARGET_INIT_DEF "InitOsc_${SYNTH_METHOD}(&_wt_osc_default freq 0 1.0f")
+elseif(SYNTH_METHOD EQUAL "fm")
+    set(TARGET_INIT_DEF "InitOsc_${SYNTH_METHOD}(&_fm_osc_default freq 1.0f 0 1.0f")
+else()
+    message(FATAL_ERROR "Wrong synth method selected")
+endif()
+
+set(TARGET_IMPL_DEF "GetSample_${ACTIVE_IMPL}")
+
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/api.h.in
+  ${CMAKE_CURRENT_BINARY_DIR}/generated/api.h
+  @ONLY
+)
+
+# Target #1 - all implementations (for desktop)
 
 set(ALL_SOURCES
     src/wt.c
@@ -31,7 +57,20 @@ add_library(synth
 target_include_directories(synth
     PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:/include>
+)
+
+# Target #2 - specific implementation (for stm32)
+
+add_library(synth_stm32
+    src/${SYNTH_METHOD}.c
+    src/${ACTIVE_IMPL}.c
+)
+
+target_include_directories(synth_stm32
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/>
+
 )
 
 
