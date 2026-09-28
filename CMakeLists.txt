@@ -96,25 +96,25 @@ target_link_libraries(test_wt_lerp
 add_test(NAME testWavetable COMMAND test_wt_lerp)
 
 
-add_executable(test_wt_signal
-    tests/test_wt_signal.c
+add_executable(test_wt_lerp_signal
+    tests/test_wt_lerp_signal.c
     src/wt_lerp.c
     src/wt.c
     external/unity/unity.c
 )
 
-target_include_directories(test_wt_signal
+target_include_directories(test_wt_lerp_signal
     PRIVATE
     ${INCLUDES}
     ${CMAKE_CURRENT_SOURCE_DIR}/external
 )
 
-target_link_libraries(test_wt_signal
+target_link_libraries(test_wt_lerp_signal
     PRIVATE
     m
 )
 
-add_test(NAME testSignalWavetable COMMAND test_wt_signal)
+add_test(NAME testWavetableLerpSignal COMMAND test_wt_signal)
 
 
 add_executable(test_sinflut
