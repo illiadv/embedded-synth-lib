@@ -2,6 +2,8 @@
 
 #include <math.h> // sin() needed by WT_GenerateTables()
 
+WT_Oscillator _wt_osc_default;
+
 sound_sample_t sinewaveTable[TABLE_LENGTH] = {0};
 sound_sample_t sawtoothTable[TABLE_LENGTH] = {0};
 sound_sample_t triangleTable[TABLE_LENGTH] = {0};
