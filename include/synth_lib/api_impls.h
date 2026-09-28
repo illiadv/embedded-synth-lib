@@ -28,7 +28,7 @@ typedef struct
     float t;
 } FM_Oscillator;
 
-extern sound_sample_t* tables[3];
+extern const sound_sample_t* tables[3];
 
 void WT_GenerateTables();
 void InitOsc_wt(WT_Oscillator *osc, float frequency, int table, float amplitude);
