@@ -3,10 +3,6 @@ project(embedded_synth_lib VERSION 1.0.0 LANGUAGES C)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-set(INCLUDES
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
 set(IMPLS
     "wt_trunc"
     "wt_lerp"
@@ -59,6 +55,7 @@ add_library(synth
 target_include_directories(synth
     PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/>
 )
 
 # Target #2 - specific implementation (for stm32)
@@ -89,7 +86,8 @@ add_executable(test_api
 
 target_include_directories(test_api
     PRIVATE
-    ${INCLUDES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
     ${CMAKE_CURRENT_SOURCE_DIR}/external
 )
 
