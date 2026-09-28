@@ -3,10 +3,8 @@
 
 #include "api_impls.h"
 
-extern WT_Oscillator _wt_osc_default;
-extern FM_Oscillator _fm_osc_default;
-
-#define InitOsc(freq) @TARGET_INIT_DEF@
+#define Oscillator @TARGET_OSC_DEF@
+#define InitOsc(osc, freq) @TARGET_INIT_DEF@
 #define GetSample @TARGET_IMPL_DEF@
 
 #endif
