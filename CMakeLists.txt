@@ -15,7 +15,7 @@ set(IMPLS
     "fm_sin"
 )
 
-set(ACTIVE_IMPL "wt_truc" CACHE STRING "Selected implementation to build")
+set(ACTIVE_IMPL "wt_trunc" CACHE STRING "Selected implementation to build")
 set_property(CACHE ACTIVE_IMPL PROPERTY STRINGS ${ALL_IMPLS})
 
 string(SUBSTRING ${ACTIVE_IMPL} 0 2 SYNTH_METHOD)
