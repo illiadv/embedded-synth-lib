@@ -34,7 +34,7 @@ endif()
 set(TARGET_IMPL_DEF "GetSample_${ACTIVE_IMPL}")
 
 configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/api.h.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/synth_lib/api.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/generated/api.h
   @ONLY
 )
