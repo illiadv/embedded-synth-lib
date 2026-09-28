@@ -10,12 +10,12 @@ sound_sample_t triangleTable[TABLE_LENGTH] = {0};
 
 sound_sample_t* tables[3] = {sinewaveTable, sawtoothTable, triangleTable};
 
-void WT_SetFrequency(WT_Oscillator *osc, float frequency)
+void SetFrequency_wt(WT_Oscillator *osc, float frequency)
 {
     osc->increment = (uint32_t)((frequency * 0x100000000) / SAMPLING_RATE);
 }
 
-void WT_InitOsc(WT_Oscillator *osc, float frequency, int table, float amplitude)
+void InitOsc_wt(WT_Oscillator *osc, float frequency, int table, float amplitude)
 {
     osc->table = table;
     osc->amplitude = amplitude;
@@ -23,10 +23,10 @@ void WT_InitOsc(WT_Oscillator *osc, float frequency, int table, float amplitude)
     osc->phase = 0.0f;
     osc->increment = 0.0f;
 
-    WT_SetFrequency(osc, frequency);
+    SetFrequency_wt(osc, frequency);
 }
 
-void WT_GenerateTables()
+void GenerateTables_WT()
 {
     for (int i = 0; i < TABLE_LENGTH; i++)
     {

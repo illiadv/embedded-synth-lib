@@ -6,16 +6,16 @@ void tearDown(void) {}
 
 void TestLerp()
 {
-    WT_GenerateTables();
+    GenerateTables_WT();
     WT_Oscillator osc;
-    WT_InitOsc(&osc, 1.0f, 0, 1.0f);
+    InitOsc_wt(&osc, 1.0f, 0, 1.0f);
 
     tables[0][0] = 0;
     tables[0][1] = 100;
     // osc.phase = 0.5f;
     osc.phase = 1 << 22;
 
-    sound_sample_t output = WT_GetSampleLerp(&osc);
+    sound_sample_t output = GetSample_wt_lerp(&osc);
     TEST_ASSERT_EQUAL_INT(50, output);
 }
 

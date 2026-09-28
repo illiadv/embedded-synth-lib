@@ -1,7 +1,7 @@
 #include "synth_lib/api_impls.h"
 
 
-sound_sample_t WT_GetSampleTrunc(WT_Oscillator *osc)
+sound_sample_t GetSample_wt_trunc(WT_Oscillator *osc)
 {
     if (!osc->active)
 	return 0;

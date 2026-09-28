@@ -9,14 +9,14 @@ void tearDown(void) {}
 void TestFrequency()
 {
     WT_Oscillator osc;
-    WT_InitOsc(&osc, 440.0f, 0, 1.0f);
+    InitOsc_wt(&osc, 440.0f, 0, 1.0f);
 
     sound_sample_t previous;
     int numCrossess = 0;
 
     for (int i = 0; i < SAMPLING_RATE; i++)
     {
-	sound_sample_t sample = WT_GetSampleLerp(&osc);
+	sound_sample_t sample = GetSample_wt_lerp(&osc);
 	if (previous <= 0 && sample > 0)
 	{
 	    numCrossess++;
@@ -30,12 +30,12 @@ void TestFrequency()
 void TestOffset()
 {
     WT_Oscillator osc;
-    WT_InitOsc(&osc, 440.0f, 0, 1.0f);
+    InitOsc_wt(&osc, 440.0f, 0, 1.0f);
     int32_t sum = 0;
 
     for (int i = 0; i < SAMPLING_RATE; i++)
     {
-	sum += WT_GetSampleLerp(&osc);
+	sum += GetSample_wt_lerp(&osc);
     }
 
     sound_sample_t threshold = MAX_SAMPLE_VALUE * 0.001f;

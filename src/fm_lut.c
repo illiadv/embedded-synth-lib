@@ -20,7 +20,7 @@ float sinfLUT(float x)
     return LUT[i];
 }
 
-sound_sample_t FM_GetSampleLUT(FM_Oscillator *osc)
+sound_sample_t GetSample_wt_lut(FM_Oscillator *osc)
 {
     float value;
 

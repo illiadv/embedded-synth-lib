@@ -2,7 +2,7 @@
 
 #include <math.h> // sin()
 
-sound_sample_t FM_GetSample(FM_Oscillator *osc)
+sound_sample_t GetSample_wt_sin(FM_Oscillator *osc)
 {
     float value;
 
