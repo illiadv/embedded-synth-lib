@@ -1,14 +1,9 @@
 #include "synth_lib/api_impls.h"
-
-#include <math.h> // sin() needed by WT_GenerateTables()
+#include "wavetables.h"
 
 WT_Oscillator _wt_osc_default;
 
-sound_sample_t sinewaveTable[TABLE_LENGTH] = {0};
-sound_sample_t sawtoothTable[TABLE_LENGTH] = {0};
-sound_sample_t triangleTable[TABLE_LENGTH] = {0};
-
-sound_sample_t* tables[3] = {sinewaveTable, sawtoothTable, triangleTable};
+const sound_sample_t* tables[3] = {sinewaveTable, sawtoothTable, triangleTable};
 
 void SetFrequency_wt(WT_Oscillator *osc, float frequency)
 {
@@ -24,19 +19,4 @@ void InitOsc_wt(WT_Oscillator *osc, float frequency, int table, float amplitude)
     osc->increment = 0.0f;
 
     SetFrequency_wt(osc, frequency);
-}
-
-void GenerateTables_WT()
-{
-    for (int i = 0; i < TABLE_LENGTH; i++)
-    {
-	sinewaveTable[i] = (sin(i* 2 * 3.141592f / TABLE_LENGTH)) * (MAX_SAMPLE_VALUE);
-
-	sawtoothTable[i] = ((float)i / TABLE_LENGTH * 2 - 1.0f) * MAX_SAMPLE_VALUE;
-
-	float v = (i < TABLE_LENGTH / 2) ? (float)i : TABLE_LENGTH - (float)i;
-	v = v * 2;
-	v = v / TABLE_LENGTH * 2 - 1.0f;
-	triangleTable[i] = v * MAX_SAMPLE_VALUE;
-    }
 }
