@@ -80,60 +80,19 @@ target_include_directories(synth_stm32
 
 enable_testing()
 
-add_executable(test_wt_lerp
-    tests/test_wt_lerp.c
-    src/wt_lerp.c
-    src/wt.c
-    external/unity/unity.c
-)
-target_include_directories(test_wt_lerp
-    PRIVATE
-    ${INCLUDES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/external
-)
-target_link_libraries(test_wt_lerp
-    PRIVATE
-    m
-)
-add_test(NAME testWavetable COMMAND test_wt_lerp)
-
-
-add_executable(test_wt_lerp_signal
-    tests/test_wt_lerp_signal.c
-    src/wt_lerp.c
-    src/wt.c
+add_executable(test_api
+    tests/test_api.c
+    src/${SYNTH_METHOD}.c
+    src/${ACTIVE_IMPL}.c
     external/unity/unity.c
 )
 
-target_include_directories(test_wt_lerp_signal
+target_include_directories(test_api
     PRIVATE
     ${INCLUDES}
     ${CMAKE_CURRENT_SOURCE_DIR}/external
 )
 
-target_link_libraries(test_wt_lerp_signal
-    PRIVATE
-    m
-)
+add_test(NAME testApi COMMAND test_api)
 
-add_test(NAME testWavetableLerpSignal COMMAND test_wt_signal)
-
-
-add_executable(test_sinflut
-    tests/test_sinflut.c
-    src/fm_lut.c
-    external/unity/unity.c
-)
-
-target_include_directories(test_sinflut
-    PRIVATE
-    ${INCLUDES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/external
-)
-
-target_link_libraries(test_sinflut
-    PRIVATE
-    m
-)
-
-add_test(NAME testSinfLUT COMMAND test_sinflut)
+add_custom_target(stm32 DEPENDS synth_stm32 test_api)
