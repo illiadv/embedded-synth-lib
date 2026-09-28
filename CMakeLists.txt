@@ -93,6 +93,11 @@ target_include_directories(test_api
     ${CMAKE_CURRENT_SOURCE_DIR}/external
 )
 
+target_link_libraries(test_api
+    PRIVATE
+    m
+)
+
 add_test(NAME testApi COMMAND test_api)
 
 add_custom_target(stm32 DEPENDS synth_stm32 test_api)
