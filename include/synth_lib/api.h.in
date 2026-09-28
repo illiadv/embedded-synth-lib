@@ -1,0 +1,26 @@
+#ifndef API_H
+#define API_H
+
+#include "api_impls.h"
+
+/* 
+* CMake will replace @MCU_TARGET_IMPL@ with the selected 
+* function name (e.g., calculate_fast) at configure time.
+*/
+
+/*
+* Use something like
+* if (FM)
+* set TARGET_INIT FM_InitOsc(freq 110 50 1.0f)
+* else
+* set TARGET_INIT WT_InitOsc(freq 0 1.0f)
+*
+*/
+
+extern WT_Oscillator _wt_osc_default;
+extern FM_Oscillator _fm_osc_default;
+
+#define InitOsc(freq) @TARGET_INIT_DEF@
+#define GetSample @TARGET_IMPL_DEF@
+
+#endif
