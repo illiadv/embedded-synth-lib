@@ -1,7 +1,7 @@
 #ifndef API_H
 #define API_H
 
-#include "api_impls.h"
+#include "synth_lib/api_impls.h"
 
 #define Oscillator @TARGET_OSC_DEF@
 #define InitOsc(osc, freq) @TARGET_INIT_DEF@
