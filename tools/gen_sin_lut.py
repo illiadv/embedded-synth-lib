@@ -13,7 +13,7 @@ def generate_table_data(table_length):
     sine = []  
   
     for i in range(table_length):  
-        val_sin = math.sin(i * 2 * math.pi / table_length)
+        val_sin = math.sin(i / table_length * 2 * math.pi)
         sine.append(val_sin)  
   
     return sine
@@ -24,10 +24,10 @@ def write_header(filename, sine):
         f.write("#define SIN_LUT_H\n\n")  
         f.write('#include "synth_lib/config.h"\n\n')
   
-        f.write("static const float sinTable[TABLE_LENGTH] = {\n")  
+        f.write("static const float sinTable[SIN_LUT_LENGTH] = {\n")  
         for i, val in enumerate(sine):  
             comma = "," if i < len(sine) - 1 else ""  
-            f.write(f"    {val}{comma}\n")  
+            f.write(f"    {val:.6f}{comma}\n")  
         f.write("};\n\n")  
   
         f.write("#endif\n")  
