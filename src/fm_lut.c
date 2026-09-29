@@ -1,23 +1,12 @@
 #include "synth_lib/api_impls.h"
+#include "sin_lut.h"
 
-#include <math.h> // sin() needed by FM_GenerateLUT
-
-float LUT[SIN_LUT_LENGTH];
-
-void FM_GenerateLUT()
-{
-    for (int i = 0; i < SIN_LUT_LENGTH; i++)
-    {
-	float x = (float)i / SIN_LUT_LENGTH * 2 * 3.1415926f;
-	LUT[i] = sinf(x);
-    }
-}
 
 float sinfLUT(float x)
 {
     unsigned int i = x / (2 * 3.1415926) * SIN_LUT_LENGTH;
     i &= (SIN_LUT_LENGTH - 1);
-    return LUT[i];
+    return sinTable[i];
 }
 
 sound_sample_t GetSample_wt_lut(FM_Oscillator *osc)
