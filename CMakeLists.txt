@@ -74,6 +74,43 @@ target_include_directories(synth_stm32
 
 )
 
+# Header generation
+
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+
+# 1. Wavetable generation
+
+add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/generated/wavetables.h"
+    COMMAND Python3::Interpreter "${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_wavetables.py"
+            --output-path "${CMAKE_CURRENT_BINARY_DIR}/generated/wavetables.h"
+	    --table-length 512
+	    --max-sample-value 32767
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_wavetables.py"
+    COMMENT "Generating wave tables..."
+    VERBATIM
+)
+
+set_source_files_properties(src/wt.c
+    PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/generated/wavetables.h"
+)
+
+# 2. Sine LUT generation
+
+add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/generated/sin_lut.h"
+    COMMAND Python3::Interpreter "${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_sin_lut.py"
+            --output-path "${CMAKE_CURRENT_BINARY_DIR}/generated/sin_lut.h"
+	    --table-length 256
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/tools/gen_sin_lut.py"
+    COMMENT "Generating sine LUT..."
+    VERBATIM
+)
+
+set_source_files_properties(src/fm_lut.c
+    PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/generated/sin_lut.h"
+)
+
 
 # Tests
 
