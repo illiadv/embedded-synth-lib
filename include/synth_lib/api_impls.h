@@ -30,13 +30,11 @@ typedef struct
 
 extern const sound_sample_t* tables[3];
 
-void WT_GenerateTables();
 void InitOsc_wt(WT_Oscillator *osc, float frequency, int table, float amplitude);
 void SetFrequency_wt(WT_Oscillator *osc, float frequency);
 sound_sample_t GetSample_wt_trunc(WT_Oscillator *osc);
 sound_sample_t GetSample_wt_lerp(WT_Oscillator *osc);
 
-void FM_GenerateLUT();
 float sinfLUT(float x);
 void InitOsc_fm(FM_Oscillator *osc, float carrier_freq, float modulation_freq, float d, float amplitude);
 sound_sample_t GetSample_fm_sin(FM_Oscillator *osc);
