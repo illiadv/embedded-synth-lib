@@ -1,6 +1,7 @@
 #include "synth_lib/api_impls.h"
 #include "sin_lut.h"
 
+#include "math.h"
 
 float sinfLUT(float x)
 {
@@ -9,7 +10,7 @@ float sinfLUT(float x)
     return sinTable[i];
 }
 
-sound_sample_t GetSample_wt_lut(FM_Oscillator *osc)
+sound_sample_t GetSample_fm_lut(FM_Oscillator *osc)
 {
     float value;
 
