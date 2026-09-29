@@ -11,13 +11,12 @@ def parse_args():
     return parser.parse_args()  
   
 def generate_table_data(table_length, max_sample_value):  
-    # Better practice: Localize these instead of relying on global variables
     sinewave = []  
     sawtooth = []  
     triangle = []  
   
     for i in range(table_length):  
-        # Sinewave (Using math.pi for maximum precision instead of 3.141592)
+        # Sinewave
         val_sin = int(round(math.sin(i * 2 * math.pi / table_length) * max_sample_value))
         sinewave.append(val_sin)  
   
@@ -38,13 +37,12 @@ def write_header(filename, sinewave, sawtooth, triangle):
     with open(filename, 'w') as f:  
         f.write("#ifndef WAVETABLES_H\n")  
         f.write("#define WAVETABLES_H\n\n")  
-        f.write('#include "config.h"\n\n') # Fixed missing quotes around config.h
+        f.write('#include "synth_lib/config.h"\n\n')
   
         # Sinewave  
         f.write("static const sound_sample_t sinewaveTable[TABLE_LENGTH] = {\n")  
         for i, val in enumerate(sinewave):  
             comma = "," if i < len(sinewave) - 1 else ""  
-            # Removed the .10g format specifier, now that it's a true int it formats perfectly
             f.write(f"    {val}{comma}\n")  
         f.write("};\n\n")  
   
@@ -72,7 +70,6 @@ def main():
   
     sinewave, sawtooth, triangle = generate_table_data(args.table_length, args.max_sample_value)  
   
-    # Passed the generated lists directly to write_header
     write_header(args.output_path, sinewave, sawtooth, triangle)  
   
     print(f"Generated {args.output_path} for size {args.table_length}.")  
