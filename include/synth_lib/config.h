@@ -28,7 +28,7 @@
 #define SAMPLE_TYPE int16_t
 #endif
 
-#define TWO_PI 3.14159265f * 2
+#define TWO_PI (3.14159265f * 2)
 
 typedef SAMPLE_TYPE sound_sample_t;
 
