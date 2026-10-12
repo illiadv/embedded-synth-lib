@@ -1,28 +1,31 @@
 #include "synth_lib/api_impls.h"
 #include "sin_lut.h"
 
-#include "math.h"
+#define LUT_SCALE ((float)SIN_LUT_LENGTH / TWO_PI)
+#define LUT_MASK  (SIN_LUT_LENGTH - 1)
 
 float sinfLUT(float x)
 {
-    unsigned int i = x / (2 * 3.1415926) * SIN_LUT_LENGTH;
-    i &= (SIN_LUT_LENGTH - 1);
-    return sinTable[i];
+    int i = (int)(x * LUT_SCALE);  
+    return sinTable[i & LUT_MASK]; 
 }
 
 sound_sample_t GetSample_fm_lut(FM_Oscillator *osc)
 {
-    float value;
 
-    float a = 2 * 3.14592f * osc->carrier_frequency;
-    float b = 2 * 3.14592f * osc->modulation_frequency;
+    float mod = osc->I * sinfLUT(osc->modulation_phase);
 
-    float I = osc->d / osc->modulation_frequency;
+    float value = osc->amplitude * sinfLUT(osc->carrier_phase + mod);
 
-    // e = Asin (at + I sin bt)
-    value = osc->amplitude * sinfLUT(a * osc->t + I * sinfLUT(b * osc->t));
+    osc->carrier_phase += osc->carrier_phase_inc;
+    if (osc->carrier_phase >= TWO_PI) {
+        osc->carrier_phase -= TWO_PI;
+    }
 
-    osc->t += (1.0f / SAMPLING_RATE);
+    osc->modulation_phase += osc->modulation_phase_inc;
+    if (osc->modulation_phase >= TWO_PI) {
+        osc->modulation_phase -= TWO_PI;
+    }
 
     return (sound_sample_t)(value * MAX_SAMPLE_VALUE);
 }
