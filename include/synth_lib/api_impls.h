@@ -20,12 +20,15 @@ typedef struct
 
 typedef struct
 {
-    float carrier_frequency;
-    float modulation_frequency;
-    float d;
-    bool active;
     float amplitude;
-    float t;
+    bool active;
+
+    float carrier_phase_inc;
+    float modulation_phase_inc;
+    float I;
+
+    float carrier_phase;
+    float modulation_phase;
 } FM_Oscillator;
 
 extern const sound_sample_t* tables[3];
