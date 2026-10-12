@@ -40,6 +40,7 @@ sound_sample_t GetSample_wt_lerp(WT_Oscillator *osc);
 
 float sinfLUT(float x);
 void InitOsc_fm(FM_Oscillator *osc, float carrier_freq, float modulation_freq, float d, float amplitude);
+void SetFrequency_fm(FM_Oscillator *osc, float f_c, float f_m, float d);
 sound_sample_t GetSample_fm_sin(FM_Oscillator *osc);
 sound_sample_t GetSample_fm_lut(FM_Oscillator *osc);
 
