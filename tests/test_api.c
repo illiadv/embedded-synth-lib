@@ -23,7 +23,7 @@ void TestFrequency()
 	previous = sample;
     }
 
-    TEST_ASSERT_INT_WITHIN(1, 440, numCrossess);
+    TEST_ASSERT_EQUAL_INT(440, numCrossess);
 }
 
 int main()
