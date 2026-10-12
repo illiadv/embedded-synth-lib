@@ -4,6 +4,9 @@ FM_Oscillator _fm_osc_default;
 
 void InitOsc_fm(FM_Oscillator *osc, float carrier_freq, float modulation_freq, float d, float amplitude)
 {
+    osc->carrier_phase = 0;
+    osc->modulation_phase = 0;
+
     osc->amplitude = amplitude;
     osc->active = true;
     SetFrequency_fm(osc, carrier_freq, modulation_freq, d);
