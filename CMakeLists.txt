@@ -9,6 +9,7 @@ set(IMPLS
     
     "fm_lut"
     "fm_sin"
+    "fm_lut_lerp"
 )
 
 add_compile_options(-g -O0)
