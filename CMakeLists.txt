@@ -12,8 +12,6 @@ set(IMPLS
     "fm_lut_lerp"
 )
 
-add_compile_options(-g -O0)
-
 set(ACTIVE_IMPL "wt_trunc" CACHE STRING "Selected implementation to build")
 set_property(CACHE ACTIVE_IMPL PROPERTY STRINGS ${ALL_IMPLS})
 
