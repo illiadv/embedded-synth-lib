@@ -9,6 +9,7 @@ set(IMPLS
     
     "fm_lut"
     "fm_sin"
+    "fm_sinf"
     "fm_lut_lerp"
 )
 
